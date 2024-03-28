@@ -136,7 +136,7 @@ checkedQ[index] = valeur
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
       <Box   fontSize={'16px'} fontFamily={"-apple-system"}>
-        <Button colorScheme="blue" mr={3} onClick={onOpen}>
+        {/* <Button colorScheme="blue" mr={3} onClick={onOpen}>
           Suivant
         </Button>
         <Modal isOpen={isOpen} onClose={onClose} size={"5xl"} >
@@ -144,7 +144,7 @@ checkedQ[index] = valeur
           <ModalContent bgColor={"#f0f1f2"} width={"full"} height={"fit-content"} pb={"40px"} ml={3} fontSize={["10px","10px","10px","15px","15px"]}>
             <ModalHeader>Informations additionelles</ModalHeader>
             <ModalCloseButton />
-            <ModalBody width={"100%"}>
+            <ModalBody width={"100%"}> */}
             <SimpleGrid columns={[1,1,1,2,2]} mb={20} spacingY={10}>
    
     
@@ -175,7 +175,7 @@ checkedQ[index] = valeur
          <Textarea border={"2px solid gray"}  onChange={(e)=>{setOtherQ(e.target.value)}}></Textarea>
          </Box>
    </SimpleGrid>
-            </ModalBody>
+            {/* </ModalBody>
   
             <ModalFooter>
               <Box onClick={()=>handleSubmit()}>
@@ -184,7 +184,7 @@ checkedQ[index] = valeur
               <Button variant="ghost" onClick={onClose}>Revenir</Button>
             </ModalFooter>
           </ModalContent>
-        </Modal>
+        </Modal> */}
       </Box>
     );
   }

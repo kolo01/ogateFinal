@@ -50,39 +50,27 @@ export default function PrincipalePopup() {
   const [stepper, setStepper] = useState(1);
 
   const Next = (actu) => {
-    if (TypePoste == "INFORMATION") {
+    if (actu == 1) {
+      setView1("none");
+      setView2("block");
+      setView3("none");
+      setView4("none");
+    } else if (actu == 2) {
+      setView1("none");
+      setView2("none");
+      setView3("block");
+      setView4("none");
+    } else if (actu == 3) {
       setView1("none");
       setView2("none");
       setView3("none");
       setView4("block");
-      setStepper(4)
+    } else {
+      setView1("none");
+      setView2("none");
+      setView3("none");
+      setView4("block");
     }
-    else{
-
-      if (actu == 1) {
-        setView1("none");
-        setView2("block");
-        setView3("none");
-        setView4("none");
-      } else if (actu == 2) {
-        setView1("none");
-        setView2("none");
-        setView3("block");
-        setView4("none");
-      } else if (actu == 3) {
-        setView1("none");
-        setView2("none");
-        setView3("none");
-        setView4("block");
-      } else {
-        setView1("none");
-        setView2("none");
-        setView3("none");
-        setView4("block");
-      }
-
-    }
-   
   };
 
   const Previous = (actu) => {
@@ -166,15 +154,9 @@ export default function PrincipalePopup() {
   const [long, setLong] = useState(0);
   const [ville, setVille] = useState("none");
   const [desc, setDesc] = useState("none");
-  const [displayed1, setDisplayed1] = useState("block");
-  const [displayed2, setDisplayed2] = useState("none");
-  const [fichiersId, setFichiersId] = useState([]); //utiliser pour recuperer les id dans la bd
-
-
   ///fonction de ce dernier
   const HandleMedia = (fields) => {
     try {
-      setLoad(true)
       var tester = 0;
       fields.map((data, index) => {
         const total = data.selectedFile.length;
@@ -219,27 +201,37 @@ export default function PrincipalePopup() {
       .post(
         "http://185.98.139.246:9090/ogatemanagement-api/client/enregistrerpublicationaveclistefichier",
         {
-          apportInitial:apportInit,
-          autreInfoSurBien:OtherB,
-          autreInfoSurQuartier:OtherQ,
+          apportInitial: JSON.parse(sessionStorage.getItem("Apport")) ?? 0,
+          autreInfoSurBien:
+            JSON.parse(sessionStorage.getItem("OAddBien")) ?? "",
+          autreInfoSurQuartier:
+            JSON.parse(sessionStorage.getItem("OAddQuart")) ?? "",
           description: desc,
-          fichierIds: fichiersId ,
+          fichierIds: fichiersId ?? [],
 
-          informationAdditionnelleSurBienIds:checkedB,
-          informationAdditionnelleSurQuartierIds:checkedQ,
-          latitude: lat,
-          localisation: ville,
-          longitude: long ,
-          nombreChambres: nbChambre,
-          nombrePieces: nbPiece,
-          nombreSalon: nbSalon,
-          periodicite:periodicite,
-          prix: prix,
-          typeAppartement:meuble,
-          typeBienId: StypeBien,
-          typeDocumentIds:checkedD,
+          informationAdditionnelleSurBienIds: JSON.parse(
+            sessionStorage.getItem("IAddBien")
+          ) ?? [null],
+          informationAdditionnelleSurQuartierIds: JSON.parse(
+            sessionStorage.getItem("IAddQuart")
+          ) ?? [null],
+          latitude: lat ?? 0,
+          localisation: ville ?? "Generalite",
+          longitude: long ?? 0,
+          nombreChambres: JSON.parse(sessionStorage.getItem("NChambre")) ?? 0,
+          nombrePieces: JSON.parse(sessionStorage.getItem("NPieces")) ?? 0,
+          nombreSalon: JSON.parse(sessionStorage.getItem("NSalon")) ?? 0,
+          periodicite:
+            JSON.parse(sessionStorage.getItem("Periodicite")) ?? "JOUR",
+          prix: JSON.parse(sessionStorage.getItem("Prix")) ?? 0,
+          typeAppartement:
+            JSON.parse(sessionStorage.getItem("meuble")) ?? "NON_MEUBLE",
+          typeBienId: JSON.parse(sessionStorage.getItem("typeBien")) ?? 0,
+          typeDocumentIds: JSON.parse(
+            sessionStorage.getItem("typeDocument")
+          ) ?? [null],
           typeFichier: "DOCUMENT",
-          typePost: TypePoste,
+          typePost: JSON.parse(sessionStorage.getItem("typePoste")),
           typeRequete: "EXPRESSION_BESOIN",
         },
         config
@@ -422,11 +414,13 @@ export default function PrincipalePopup() {
     console.log("OAddQuart", JSON.stringify(OtherQ));
 
     ////last
+    console.log("fichiers Id",fields);
     console.log("latitude", JSON.stringify(lat));
     console.log("longitude", JSON.stringify(long));
     console.log("description", JSON.stringify(desc));
     console.log("ville", JSON.stringify(ville));
-    console.log("fichiers Id",fichiersId);
+
+
   };
 
   return (
@@ -568,7 +562,6 @@ export default function PrincipalePopup() {
                               options={documentId}
                               labelField="designation"
                               valueField="id"
-                              onChange={(label) => setCheckedD(label.map((data)=> data.id))}
                             />
                           </Box>
                         </Box>
@@ -747,7 +740,7 @@ export default function PrincipalePopup() {
                     <Box height={"fit-content"}>
                       <Sl
                         multi={true}
-                        options={quartierId}
+                        options={documentId}
                         labelField="designation"
                         valueField="id"
                       />
@@ -907,27 +900,14 @@ export default function PrincipalePopup() {
                   Suivant
                 </Button>
               ) : (
-                <Box>
                 <Button
-                display={displayed1}
-                isLoading={load}
                   colorScheme="blue"
                   onClick={() => {
-                    console.log("dernier"),HandleMedia(fields)
+                    console.log("dernier"), handleSubmit();
                   }}
                 >
                   Terminer
                 </Button>
-                <Button
-                display={displayed2}
-                  colorScheme="blue"
-                  onClick={() => {
-                    console.log("dernier"),SavePost()
-                  }}
-                >
-                  Valider
-                </Button>
-                </Box>
               )}
             </Box>
 
