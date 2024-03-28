@@ -1,0 +1,53 @@
+setTypePoste (recupere le type de poste) - 
+
+setStypeBien ( recupere le type de bien ) -
+
+CheckedDoc( fonction permettant de faire le mappage des documents cliquée ou non) -
+
+SetNbPiece ( recupere le nombre de pieces) -
+
+SetNbChambre (recupere le nombre de chambre) -
+
+SetNbSbain (recupere le nombre de salle de bain) -
+
+SetNbSalon ( recupere le nombre de salon) -
+
+SetPrix (recupere le prix) -
+
+SetPeriodicite ( recupere la periodicite) -
+
+SetApportInit ( recupere l'apport initial(si neccessaire)) -
+
+CheckedBien( fonction permettant de faire le mappage des biens cochés) -
+
+CheckedQuartier( fonction permettant de faire le mappage des quartier cochés) -
+
+handleDocType( fonction permettant de recuperer le type de document et de forcer le input a accepter qu'un type de fichier)
+
+setDocType(permet de recuperer le type de document) --
+
+setAccepted ( defini le format autorisé par le input) --
+
+setFichiers( permet de recuperer les fichiers du input) --
+
+setLat(recupere la latitude) --
+
+setLong (recupere la longitude) --
+
+setVille (recupere la ville) --
+
+
+
+
+
+
+
+setFichiersId( recupere les id apres avoir passer les fichiers a l'api)
+
+HandleMediaIdFileGen( genere les id des fichiers )
+
+
+SavePost ( envoie le formulaire a l'api)
+
+
+SetLoader(permet de definir si le boutton est en loading ou non)
