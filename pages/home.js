@@ -234,7 +234,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    requestForToken();
+    // requestForToken();
     if (notification?.title) {
       notify();
     }
