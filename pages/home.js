@@ -88,67 +88,72 @@ export default function Home() {
   }
 
   const requestForToken = () => {
-    let config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    const permission = Notification.requestPermission();
-    if (permission == "granted") {
-      return getToken(getMessaging(app), {
-        vapidKey:
-          "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
-      })
-        .then(async (currentToken) => {
-          if (currentToken) {
-            console.log("current token for client: ", currentToken);
-            // Perform any other neccessary action with the token
-            setToken2(currentToken);
-            await axios.post(
-              `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
-              { token: currentToken },
-              config
-            );
-            localStorage.setItem("item", currentToken);
-          } else {
-            // Show permission request UI
-            console.log(
-              "No registration token available. Request permission to generate one."
-            );
-            setToken2("Okay");
-          }
-        })
-        .catch((err) => {
-          console.log("An error occurred while retrieving token. ", err);
-        });
-    } else {
-      // alert("SVP merci de bien vouloir activer les notifications");
+    try {
+      let config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
       const permission = Notification.requestPermission();
-      return getToken(getMessaging(app), {
-        vapidKey:
-          "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
-      })
-        .then(async (currentToken) => {
-          if (currentToken) {
-            console.log("current token for client: ", currentToken);
-            // Perform any other neccessary action with the token
-            await axios.post(
-              `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
-              { token: currentToken },
-              config
-            );
-            setToken2(currentToken);
-            localStorage.setItem("item", currentToken);
-          } else {
-            // Show permission request UI
-            console.log(
-              "No registration token available. Request permission to generate one."
-            );
-            setToken2("Okay");
-          }
+      if (permission == "granted") {
+        return getToken(getMessaging(app), {
+          vapidKey:
+            "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
         })
-        .catch((err) => {
-          console.log("An error occurred while retrieving token. ", err);
-        });
+          .then(async (currentToken) => {
+            if (currentToken) {
+              console.log("current token for client: ", currentToken);
+              // Perform any other neccessary action with the token
+              setToken2(currentToken);
+              await axios.post(
+                `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
+                { token: currentToken },
+                config
+              );
+              localStorage.setItem("item", currentToken);
+            } else {
+              // Show permission request UI
+              console.log(
+                "No registration token available. Request permission to generate one."
+              );
+              setToken2("Okay");
+            }
+          })
+          .catch((err) => {
+            console.log("An error occurred while retrieving token. ", err);
+          });
+      } else {
+        // alert("SVP merci de bien vouloir activer les notifications");
+        const permission = Notification.requestPermission();
+        return getToken(getMessaging(app), {
+          vapidKey:
+            "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
+        })
+          .then(async (currentToken) => {
+            if (currentToken) {
+              console.log("current token for client: ", currentToken);
+              // Perform any other neccessary action with the token
+              await axios.post(
+                `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
+                { token: currentToken },
+                config
+              );
+              setToken2(currentToken);
+              localStorage.setItem("item", currentToken);
+            } else {
+              // Show permission request UI
+              console.log(
+                "No registration token available. Request permission to generate one."
+              );
+              setToken2("Okay");
+            }
+          })
+          .catch((err) => {
+            console.log("An error occurred while retrieving token. ", err);
+          });
+      }s
+    } catch (error) {
+      
     }
+  
   };
 
   onMessageListener()
