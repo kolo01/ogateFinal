@@ -156,15 +156,15 @@ export default function Home() {
   
   };
 
-  onMessageListener()
-    .then((payload) => {
-      setNotification({
-        title: payload?.notification?.title,
-        body: payload?.notification?.body,
-      });
-      router.replace(router.asPath);
-    })
-    .catch((err) => console.log("failed: ", err));
+  // onMessageListener()
+  //   .then((payload) => {
+  //     setNotification({
+  //       title: payload?.notification?.title,
+  //       body: payload?.notification?.body,
+  //     });
+  //     router.replace(router.asPath);
+  //   })
+  //   .catch((err) => console.log("failed: ", err));
 
 
     const Zero = () =>{
@@ -235,9 +235,9 @@ export default function Home() {
 
   useEffect(() => {
     // requestForToken();
-    if (notification?.title) {
-      notify();
-    }
+    // if (notification?.title) {
+    //   notify();
+    // }
     try {
       // console.log(localStorage.getItem("local"))
       if (

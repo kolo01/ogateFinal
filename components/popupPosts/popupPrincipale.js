@@ -252,16 +252,16 @@ export default function PrincipalePopup() {
           duration: 7000,
         });
         router.reload();
-      });
-    // .catch((error) => {
-    //   console.log(error),
-    //     toast({
-    //       title: "Erreur lors de l'enregistrement",
-    //       status: "error",
-    //       description: "Veuillez réesayer svp!!!",
-    //       duration: 7000,
-    //     });
-    // })
+      })
+    .catch((error) => {
+      console.log(error),
+        toast({
+          title: "Erreur lors de l'enregistrement",
+          status: "error",
+          description: "Veuillez réesayer svp!!!",
+          duration: 7000,
+        });
+    })
   };
 
   const handleAddField = () => {
