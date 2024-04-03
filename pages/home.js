@@ -43,7 +43,7 @@ import { useStyleRegistry } from "styled-jsx";
 import MyComponent from "./testMap";
 import { MdGraphicEq } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
-import { getMessaging, getToken, onMessage } from "@firebase/messaging";
+// import { getMessaging, getToken, onMessage } from "@firebase/messaging";
 import { app } from "@/utils/firebase";
 
 export default function Home() {
@@ -63,98 +63,98 @@ export default function Home() {
 
   const [token2, setToken2] = useState("");
   const [notification, setNotification] = useState({ title: "", body: "" });
-  const notify = () => {
-    toast(<ToastDisplay />);
-  };
+  // const notify = () => {
+  //   toast(<ToastDisplay />);
+  // };
 
-  const onMessageListener = () =>
-    new Promise((resolve) => {
-      onMessage(getMessaging(app), (payload) => {
-        console.log("payload", payload);
-        resolve(payload);
-        // router.replace(router.asPath)
-      });
-    });
+  // const onMessageListener = () =>
+  //   new Promise((resolve) => {
+  //     onMessage(getMessaging(app), (payload) => {
+  //       console.log("payload", payload);
+  //       resolve(payload);
+  //       // router.replace(router.asPath)
+  //     });
+  //   });
 
-  function ToastDisplay() {
-    return (
-      <Box width={"full"}>
-        <Text fontSize={"15px"} fontWeight={"bold"}>
-          {notification?.title}
-        </Text>
-        <Text>{notification?.body}</Text>
-      </Box>
-    );
-  }
+  // function ToastDisplay() {
+  //   return (
+  //     <Box width={"full"}>
+  //       <Text fontSize={"15px"} fontWeight={"bold"}>
+  //         {notification?.title}
+  //       </Text>
+  //       <Text>{notification?.body}</Text>
+  //     </Box>
+  //   );
+  // }
 
-  const requestForToken = () => {
-    try {
-      let config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const permission = Notification.requestPermission();
-      if (permission == "granted") {
-        return getToken(getMessaging(app), {
-          vapidKey:
-            "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
-        })
-          .then(async (currentToken) => {
-            if (currentToken) {
-              console.log("current token for client: ", currentToken);
-              // Perform any other neccessary action with the token
-              setToken2(currentToken);
-              await axios.post(
-                `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
-                { token: currentToken },
-                config
-              );
-              localStorage.setItem("item", currentToken);
-            } else {
-              // Show permission request UI
-              console.log(
-                "No registration token available. Request permission to generate one."
-              );
-              setToken2("Okay");
-            }
-          })
-          .catch((err) => {
-            console.log("An error occurred while retrieving token. ", err);
-          });
-      } else {
-        // alert("SVP merci de bien vouloir activer les notifications");
-        const permission = Notification.requestPermission();
-        return getToken(getMessaging(app), {
-          vapidKey:
-            "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
-        })
-          .then(async (currentToken) => {
-            if (currentToken) {
-              console.log("current token for client: ", currentToken);
-              // Perform any other neccessary action with the token
-              await axios.post(
-                `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
-                { token: currentToken },
-                config
-              );
-              setToken2(currentToken);
-              localStorage.setItem("item", currentToken);
-            } else {
-              // Show permission request UI
-              console.log(
-                "No registration token available. Request permission to generate one."
-              );
-              setToken2("Okay");
-            }
-          })
-          .catch((err) => {
-            console.log("An error occurred while retrieving token. ", err);
-          });
-      }s
-    } catch (error) {
+  // const requestForToken = () => {
+  //   try {
+  //     let config = {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     };
+  //     const permission = Notification.requestPermission();
+  //     if (permission == "granted") {
+  //       return getToken(getMessaging(app), {
+  //         vapidKey:
+  //           "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
+  //       })
+  //         .then(async (currentToken) => {
+  //           if (currentToken) {
+  //             console.log("current token for client: ", currentToken);
+  //             // Perform any other neccessary action with the token
+  //             setToken2(currentToken);
+  //             await axios.post(
+  //               `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
+  //               { token: currentToken },
+  //               config
+  //             );
+  //             localStorage.setItem("item", currentToken);
+  //           } else {
+  //             // Show permission request UI
+  //             console.log(
+  //               "No registration token available. Request permission to generate one."
+  //             );
+  //             setToken2("Okay");
+  //           }
+  //         })
+  //         .catch((err) => {
+  //           console.log("An error occurred while retrieving token. ", err);
+  //         });
+  //     } else {
+  //       // alert("SVP merci de bien vouloir activer les notifications");
+  //       const permission = Notification.requestPermission();
+  //       return getToken(getMessaging(app), {
+  //         vapidKey:
+  //           "BFRmFZ3CsyZ2EF8rO78MDYieqCookk1exTmOL3u4OuvQyYhamK30HN9VqwTO3DN6q01l20Koxh49F5-YCi1PoTE",
+  //       })
+  //         .then(async (currentToken) => {
+  //           if (currentToken) {
+  //             console.log("current token for client: ", currentToken);
+  //             // Perform any other neccessary action with the token
+  //             await axios.post(
+  //               `http://185.98.139.246:9090/ogatemanagement-api/client/enregistrertoken?token=${currentToken}`,
+  //               { token: currentToken },
+  //               config
+  //             );
+  //             setToken2(currentToken);
+  //             localStorage.setItem("item", currentToken);
+  //           } else {
+  //             // Show permission request UI
+  //             console.log(
+  //               "No registration token available. Request permission to generate one."
+  //             );
+  //             setToken2("Okay");
+  //           }
+  //         })
+  //         .catch((err) => {
+  //           console.log("An error occurred while retrieving token. ", err);
+  //         });
+  //     }s
+  //   } catch (error) {
       
-    }
+  //   }
   
-  };
+  // };
 
   // onMessageListener()
   //   .then((payload) => {

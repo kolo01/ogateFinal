@@ -7,7 +7,7 @@ export default function Logo(){
     return(
         <>
           <Box  width={"fit-content"} height={"41px"} ml={"12%"} cursor={"pointer"} onClick={()=>router.push("/")}  mr={2} marginTop={"20px"} >
-            <Image src="./logo.jpg.png"  alt={logo} height={"41px"}/>
+            <Image src="/logo.jpg.png"  alt={logo} height={"41px"}/>
         </Box>
         </>
     )
