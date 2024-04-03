@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 
-import { getMessaging, getToken } from "firebase/messaging";
 
 //Firebase Config values imported from .env file
 const firebaseConfig = {

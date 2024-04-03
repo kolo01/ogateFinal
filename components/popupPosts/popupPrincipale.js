@@ -432,6 +432,7 @@ export default function PrincipalePopup() {
   return (
     <Box fontSize={"12px"} fontFamily={"-apple-system"}>
       <Box
+      display={{base:"flex",lg:"grid"}}
         onClick={onOpen}
         maxW={"107px"}
         maxH={"56px"}

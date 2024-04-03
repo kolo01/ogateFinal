@@ -43,7 +43,7 @@ import { useStyleRegistry } from "styled-jsx";
 import MyComponent from "./testMap";
 import { MdGraphicEq } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
-// import { getMessaging, getToken, onMessage } from "@firebase/messaging";
+// import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { app } from "@/utils/firebase";
 
 export default function Home() {
