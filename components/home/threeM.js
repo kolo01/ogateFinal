@@ -15,9 +15,7 @@ export default function ThreeSecM(){
         image:"./all/Home.png",
         text:"Accueil", l:2},
        
-        {
-            image:"./all/partenaire.png",
-            text:"Mes relations", l:5},
+       
             {
                 image:"./all/notifications.png",
                 text:"Notifications", l:10},,
@@ -62,7 +60,7 @@ export default function ThreeSecM(){
                
                 <Text fontSize={"16px"} lineHeight={"16px"} mt={2} ml={2}>{"Accueil"}</Text>
                 </Box>
-                <Box _hover={{
+                {/* <Box _hover={{
                         bgColor:"transparent",
                         textAlign:"center",
                         fontWeight:700,
@@ -75,7 +73,7 @@ export default function ThreeSecM(){
                    </Box>
                    </Center>
                 <Text fontSize={"16px"} mt={2} ml={2} lineHeight={"16px"} >{"Mes relations"}</Text>
-                </Box>
+                </Box> */}
                 <Box  _hover={{
                         bgColor:"transparent",
                         textAlign:"center",
@@ -98,7 +96,7 @@ export default function ThreeSecM(){
                     }} display={"flex"} mt={2} mr={5} maxW={"107px"} maxH={"56px"} textAlign={"center"}  cursor={"pointer"}>
                 <PrincipalePopup/>
                 </Box>
-                <Box _hover={{
+                {/* <Box _hover={{
                         bgColor:"transparent",
                         textAlign:"center",
                         fontWeight:700,
@@ -110,7 +108,7 @@ export default function ThreeSecM(){
                    </Box>
                
                 <Text fontSize={"16px"}  mt={1} ml={2} lineHeight={"16px"} >{"Message"}</Text>
-                </Box>
+                </Box> */}
                 <Box>
                     <Button bgColor={"transparent"} _hover={{
                         bgColor:"transparent",

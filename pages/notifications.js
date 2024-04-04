@@ -43,11 +43,11 @@ export default function Offers(){
         router.push("/")
     }
   },[nom])
-    return(<Box bgColor={"#F6F6F6"} fontFamily={"-apple-system"} pb={10} h={"45em"}>
+    return(<Box bgColor={"#F6F6F6"} w={{base:"200%",lg:"full"}} fontFamily={"-apple-system"} pb={10} h={{base:"calc(200vh)",lg:"calc(100vh)"}}>
      <NavbarCo/>
     <Center mt={10}>
         <Profilers/>
-        <Box ml={10} width={"788px"} pt={10} boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"} height={"fit-content"}  borderRadius={"25px"} bgColor={"white"}>
+        <Box ml={{base:5,lg:10}} width={"788px"} pt={10} boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"} height={"fit-content"}  borderRadius={"25px"} bgColor={"white"}>
         <Flex pl={10} mb={2} height={"fit-content"} >
             <Flex border={"1px solid #F1F1F1"} p={2}>
                 <Image src="./sort.png" alt="sort" />
