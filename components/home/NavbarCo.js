@@ -1,4 +1,4 @@
-import { Button, Center, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Input, InputGroup, InputLeftElement, InputRightElement, useDisclosure } from "@chakra-ui/react";
+import { Button, Center, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Input, InputGroup, InputLeftElement, InputRightElement, useDisclosure } from "@chakra-ui/react";
 import { FcSearch } from "react-icons/fc";
 import Logo from "../src/Logo";
 import ThreeSec from "./three";
@@ -27,19 +27,22 @@ export default function NavbarCo(){
          </Center>
          <ThreeSec/>
         </Flex>
-        <Center mr={20}>
-        <Flex  display={{base:"flex", lg: "none"}}>
+       
+        <Flex   justifyContent={"space-between"} px={20}>
             <Logo/>
-            <InputGroup width={"335px"} height={"34px"} mt={5} >
+            <InputGroup border={"1px solid black"} width={["205px","205px","205px","335px","335px"]} mr={[2,2,2,0,0]} height={"34px"} mt={5} >
          <Input type="search" placeholder="Rechercher" border={"none"}  />
          <InputRightElement  width={"25px"} mr={2}  as={Search2Icon}/>
          </InputGroup>
              <Button  mt={5} colorScheme='blue' onClick={onOpen}>
         Menu
       </Button>
-      <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay />
-        <DrawerContent>
+      <Drawer placement={"left"}  onClose={onClose} isOpen={isOpen}>
+      
+        {/* <DrawerOverlay /> */}
+        
+        <DrawerContent >
+        <DrawerCloseButton/>
           <DrawerHeader borderBottomWidth='1px'>Menu</DrawerHeader>
           <DrawerBody>
             <ThreeSecM/>
@@ -47,7 +50,8 @@ export default function NavbarCo(){
         </DrawerContent>
       </Drawer>
         </Flex>
-        </Center>
+       
+        
         </>
     )
 }

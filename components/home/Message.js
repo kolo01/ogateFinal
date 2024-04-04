@@ -215,12 +215,18 @@ export default function Messages({
 
   return (
     <>
+
+   
+
+
       <Box
+      
       fontSize={'16px'} fontFamily={"-apple-system"}
-        width={{ base: "full", lg: "555px" }}
+        width={{ base: "555px", lg: "555px" }}
         height={"fit-content"}
         py={5}
         my={5}
+        
         color={"black"}
         bgColor={"white"}
         borderRadius={"2%"}

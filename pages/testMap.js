@@ -134,7 +134,9 @@ function MyComponent() {
           View all on map
         </Button>
       </Center>
+      <Box  >
       <GoogleMap
+      
         mapContainerStyle={containerStyle}
         mapTypeId="hybrid"
         zoom={zoom}
@@ -182,6 +184,7 @@ function MyComponent() {
           </>
         ))}
       </GoogleMap>
+      </Box>
     </>
   ) : (
     <></>

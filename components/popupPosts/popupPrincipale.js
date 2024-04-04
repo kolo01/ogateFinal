@@ -461,7 +461,9 @@ export default function PrincipalePopup() {
           <ModalHeader>Informations de base</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <Box display={{base:"none",lg:"block "}}>
             <Stepper size="lg" colorScheme="red" index={stepper}>
+             
               {steps.map((step, index) => (
                 <Step
                   key={index}
@@ -485,10 +487,11 @@ export default function PrincipalePopup() {
                   <StepSeparator />
                 </Step>
               ))}
+             
             </Stepper>
             {/* First view */}
             <Box display={view1}>
-              <SimpleGrid columns={[1, 1, 2, 2, 2]} mt={2} spacingX={10} mx={5}>
+              <SimpleGrid columns={[1, 1, 1, 2, 2]} mt={2} spacingX={10} mx={5}>
                 <Box width={"100%"}>
                   <Text>Type de postes</Text>
                   <Select
@@ -893,6 +896,439 @@ export default function PrincipalePopup() {
                 </Box>
               </SimpleGrid>
             </Box>
+            </Box>
+
+                    {/* mobile */}
+
+                    <Flex display={{base:"flex",lg:"none "}}>
+            <Stepper size="xs" orientation="vertical" colorScheme="red" index={stepper}>
+             
+              {steps.map((step, index) => (
+                <Step
+                  key={index}
+                  onClick={() => {
+                    setStepper(index + 1), Choice(index + 1);
+                  }}
+                >
+                  <StepIndicator>
+                    <StepStatus
+                      complete={<StepIcon />}
+                      incomplete={<StepNumber />}
+                      active={<StepNumber />}
+                    />
+                  </StepIndicator>
+
+                  <Box flexShrink="0">
+                    <StepTitle>{step.title}</StepTitle>
+                    <StepDescription>{step.description}</StepDescription>
+                  </Box>
+
+                  <StepSeparator />
+                </Step>
+              ))}
+             
+            </Stepper>
+            {/* First view */}
+            <Box display={view1}>
+              <SimpleGrid columns={[1, 1, 1, 2, 2]} mt={2} spacingX={10} mx={5}>
+                <Box width={"100%"}>
+                  <Text>Type de postes</Text>
+                  <Select
+                    width={"fit-content"}
+                    onChange={(e) => setTypePoste(e.target.value)}
+                  >
+                    <option value={"INFORMATION"}>INFORMATION</option>
+                    <option value={"VENTE"}>VENTE</option>
+                    <option value={"LOCATION"}>LOCATION</option>
+                    <option value={"LOCATION_VENTE"}>LOCATION-VENTE</option>
+                    {/* <option value={"MEDIA"}>MEDIA</option> */}
+                  </Select>
+                </Box>
+                {TypePoste == "INFORMATION" ? (
+                  <></>
+                ) : (
+                  <>
+                    <Box width={"100%"}>
+                      <Box>
+                        <Text>Type de bien</Text>
+                        <Select
+                          width={"fit-content"}
+                          onChange={(e) => {
+                            setStypeBien(e.target.value);
+                          }}
+                        >
+                          <option>Veuillez choisir une option</option>
+                          {typebienId.map((data, index) => (
+                            <option key={index} value={parseInt(index + 1)}>
+                              {data.designation}
+                            </option>
+                          ))}
+                        </Select>
+                      </Box>
+                    </Box>
+                    {parseInt(StypeBien) < 3 ? (
+                      <>
+                        {StypeBien == "1" || StypeBien == "2" ? (
+                          <Box mt={2}>
+                            <Text>Meublé?</Text>
+                            <RadioGroup onChange={(e) => setMeuble(e)}>
+                              <Radio value="MEUBLE" mr={5}>
+                                OUI
+                              </Radio>
+                              <Radio value="NON_MEUBLE">NON</Radio>
+                            </RadioGroup>
+                          </Box>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  
+
+
+                    {Object.values(typebienId)[parseInt(StypeBien) - 1]
+                      .documentIsAssocieted ? (
+                      <Box mt={2}>
+                        <Text fontWeight={600}>Type de document</Text>
+                        <Box height={"fit-content"} py={2}>
+                          <Box width={"100%"} mt={1} spacing={2}>
+   
+
+                            <Sl
+                            
+                              multi={true}
+                              options={documentId}
+                              labelField="designation"
+                              valueField="id"
+                              onChange={(label) => setCheckedD(label.map((data)=> data.id))}
+                            />
+                          </Box>
+                        </Box>
+                      </Box>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+              </SimpleGrid>
+            </Box>
+
+            {/* DExieme view */}
+            <Box display={view2}>
+              <SimpleGrid columns={[1, 1, 2, 2, 2]} mt={2} spacingY={5}>
+                <Box mt={2} width={"100%"}>
+                  <Text fontWeight={600}>N° de piéces</Text>
+                  <Input
+                    type="number"
+                    width={"80%"}
+                    onChange={(e) => SetNbPiece(e.target.valueAsNumber)}
+                    placeholder={"120"}
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                  />
+                </Box>
+                <Box mt={2} width={"100%"}>
+                  <Flex>
+                    {" "}
+                    <Text fontWeight={600}>N° de chambre</Text>{" "}
+                  </Flex>
+                  <Input
+                    type="number"
+                    width={"80%"}
+                    onChange={(e) => SetNbChambre(e.target.valueAsNumber)}
+                    placeholder={"5"}
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                  />
+                </Box>
+                <Box mt={2} width={"100%"}>
+                  <Flex>
+                    {" "}
+                    <Text fontWeight={600}>N° de salle de bain </Text>{" "}
+                    {/* <Text fontSize={"15px"} color={"gray.400"}>
+                    (optionnel)
+                  </Text> */}
+                  </Flex>
+                  <Input
+                    type="number"
+                    width={"80%"}
+                    onChange={(e) => SetNbSbain(e.target.valueAsNumber)}
+                    placeholder={"3"}
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                  />
+                </Box>
+                <Box mt={2} width={"100%"}>
+                  <Flex>
+                    {" "}
+                    <Text fontWeight={600}>N° de salon </Text>{" "}
+                    {/* <Text fontSize={"15px"} color={"gray.400"}>
+                    (optionnel)
+                  </Text> */}
+                  </Flex>
+                  <Input
+                    type="number"
+                    width={"80%"}
+                    onChange={(e) => SetNbSalon(e.target.valueAsNumber)}
+                    placeholder={"2"}
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                  />
+                </Box>
+                <Box width={"100%"}>
+                  <Flex>
+                    {" "}
+                    <Text fontWeight={600}>Prix </Text>{" "}
+                  </Flex>
+                  <Input
+                    type="number"
+                    width={"80%"}
+                    onChange={(e) => SetPrix(e.target.valueAsNumber)}
+                    placeholder={"200000 "}
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                  />
+                </Box>
+                <Box width={"100%"}>
+                  <Text fontWeight={600}>Periodicité de paiements</Text>
+                  <Select
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                    width={"80%"}
+                    onChange={(e) => SetPeriodicite(e.target.value)}
+                    placeholder="Periodicité de paiement"
+                  >
+                    <option value={"JOUR"}>Jour</option>
+
+                    <option value={"MOIS"}>Mois</option>
+                    <option value={"ANNEE"}>Année</option>
+                  </Select>
+                </Box>
+                {TypePoste == "LOCATION" ||
+                TypePoste == "VENTE" ||
+                TypePoste == "LOCATION_VENTE" ? (
+                  <Box mt={2} width={"100%"}>
+                    <Text fontWeight={600}>Apport initial</Text>
+                    <Input
+                      height={"50px"}
+                      border={"2px solid gray"}
+                      _placeholder={{
+                        color: "cyan.700",
+                      }}
+                      type="number"
+                      width={"80%"}
+                      onChange={(e) => SetApportInit(e.target.valueAsNumber)}
+                      placeholder="20000000"
+                      maxLength={12}
+                    />
+                  </Box>
+                ) : (
+                  <></>
+                )}
+              </SimpleGrid>
+            </Box>
+
+            {/* Troisieme view */}
+            <Box display={view3}>
+              <Box fontSize={"16px"} fontFamily={"-apple-system"}>
+                <SimpleGrid columns={[1, 1, 1, 2, 2]} mb={20} spacingY={10}>
+                  <Box width={"full"} ml={2} mt={2}>
+                    <Text fontWeight={600}>
+                      Information additionnelle sur le bien
+                    </Text>
+                    <Box height={"fit-content"} >
+                      <Sl
+                        multi={true}
+                        options={bienId}
+                        labelField="designation"
+                        valueField="id"
+                      />
+                    </Box>
+                  </Box>
+                  <Box width={"full"} ml={2} mt={2}>
+                    <Text fontWeight={600}> Autre information sur le bien</Text>
+                    <Textarea
+                      border={"2px solid gray"}
+                      onChange={(e) => {
+                        setOtherB(e.target.value);
+                      }}
+                    ></Textarea>
+                  </Box>
+                  <Box width={"full"} ml={2} mt={2}>
+                    <Text fontWeight={600}>
+                      Information additionnelle sur le quartier
+                    </Text>
+                    <Box height={"fit-content"}>
+                      <Sl
+                        multi={true}
+                        options={quartierId}
+                        labelField="designation"
+                        valueField="id"
+                      />
+                    </Box>
+                  </Box>
+                  <Box width={"full"} ml={2} mt={2}>
+                    <Text fontWeight={600}>
+                      {" "}
+                      Autre information sur le quartier
+                    </Text>
+                    <Textarea
+                      border={"2px solid gray"}
+                      onChange={(e) => {
+                        setOtherQ(e.target.value);
+                      }}
+                    ></Textarea>
+                  </Box>
+                </SimpleGrid>
+              </Box>
+            </Box>
+
+            {/* Derniere Vue */}
+            <Box display={view4}>
+              <SimpleGrid columns={[1, 1, 1, 2, 2]} spacingX={20} mb={20}>
+                {fields.map((field) => (
+                  <>
+                    <Box key={field.id} width={"full"} mt={2}>
+                      <Text fontWeight={600}>Type de Fichier</Text>
+                      <Select
+                        height={"50px"}
+                        border={"2px solid gray"}
+                        _placeholder={{
+                          color: "cyan.700",
+                        }}
+                        onChange={(e) => {
+                          handleFileTypeChange(e, field.id);
+                        }}
+                      >
+                        <option value={"IMAGE"}>IMAGE</option>
+                        <option value={"DOCUMENT"}>DOCUMENT</option>
+                        <option value={"VIDEO"}>VIDEO</option>
+                      </Select>
+                    </Box>
+                    {field.fileType && (
+                      <Box width={"full"} mt={2}>
+                        <Text fontWeight={600}>Fichier(s)</Text>
+                        <Flex>
+                          <Input
+                            border={"2px solid gray"}
+                            _placeholder={{
+                              color: "cyan.700",
+                            }}
+                            type="file"
+                            accept={getFileAcceptType(field.fileType)}
+                            multiple={true}
+                            onChange={(e) => handleFileChange(e, field.id)}
+                          />
+                          {field.id == 1 ? (
+                            <Button
+                              ml={10}
+                              bgColor={"#00ffef"}
+                              textAlign={"center"}
+                              fontSize={"20px"}
+                              onClick={handleAddField}
+                              borderRadius={"full"}
+                            >
+                              +
+                            </Button>
+                          ) : (
+                            <Button
+                              ml={10}
+                              bgColor={"#00ffef"}
+                              textAlign={"center"}
+                              fontSize={"20px"}
+                              onClick={() => handleRemoveFields(field.id)}
+                              borderRadius={"full"}
+                            >
+                              -
+                            </Button>
+                          )}
+                        </Flex>
+                      </Box>
+                    )}
+                  </>
+                ))}
+                <Box width={"full"} mt={2}>
+                  <Text fontWeight={600}>Localisation</Text>
+                  <Input
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                    type="text"
+                    placeholder=" Localisation"
+                    onChange={(e) => {
+                      setVille(e.target.value);
+                    }}
+                  />
+                </Box>
+                <Box width={"full"} mt={2}>
+                  <Text fontWeight={600}>Latitude</Text>
+                  <Input
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                    type="number"
+                    placeholder="latitude"
+                    onChange={(e) => setLat(e.target.valueAsNumber)}
+                  />
+                </Box>
+                <Box width={"full"} mt={2}>
+                  <Text fontWeight={600}>Longitude</Text>
+                  <Input
+                    height={"50px"}
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                    type="number"
+                    placeholder="Longitude"
+                    onChange={(e) => setLong(e.target.valueAsNumber)}
+                  />
+                </Box>
+
+                <Box>
+                  <Text fontWeight={600}>Description</Text>
+                  <Textarea
+                    placeholder="Belle demeure en bord de mer"
+                    border={"2px solid gray"}
+                    _placeholder={{
+                      color: "cyan.700",
+                    }}
+                    width={"100%"}
+                    onChange={(e) => {
+                      setDesc(e.target.value);
+                    }}
+                    height={"150px"}
+                  />
+                </Box>
+              </SimpleGrid>
+            </Box>
+            </Flex>
+
+
           </ModalBody>
 
           <ModalFooter>

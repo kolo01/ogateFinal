@@ -279,7 +279,11 @@ export default function Home() {
   }, [router, token]);
   if (checker) {
     return (
-      <Box bgColor={"#f3f3f3 "} w={"full"} minH={"calc(100vh)"}>
+      <>
+      <Box bgColor={"#f3f3f3 "} 
+      w={{base:"200%",lg:"full"}} 
+      //  display={["none", "none", "none", "block", "block"]}  
+      minH={"calc(100vh)"}>
         <NavbarCo />
         <Center>
           <Toaster position="bottom-right" reverseOrder={false} />
@@ -292,7 +296,7 @@ export default function Home() {
               <Profilers />
             </Box>
 
-            <Box mr={5}>
+            <Box mr={5} w={{base:"full",lg:"full"}}>
               <Box
                 bgColor={"whiteAlpha.600"}
                 mb={2}
@@ -412,16 +416,7 @@ export default function Home() {
                 <>
                   {" "}
                   <Box bgColor={"white"} p={2} borderRadius={"xl"}>
-                    {/* <AspectRatio ratio={16 / 9} mb={10} bgColor={"white"} borderRadius={25}>
-                      <iframe
-                        loading="lazy"
-                        allowFullScreen
-                        referrerPolicy="no-referrer-when-downgrade"
-                        src={
-                          "https://www.google.com/maps/embed/v1/place?key=AIzaSyAoJQLE8uAbWnyPHCv-_udEUhH7HQooJlM&q={'DEUX PLATEAUX BLD LATRILLE ','angre 8eme tranche'}"
-                        }
-                      ></iframe>
-                    </AspectRatio> */}
+                
                     <MyComponent />
                   </Box>
                   {message.map((data, ind) => (
@@ -481,6 +476,177 @@ export default function Home() {
           </Flex>
         </Center>
       </Box>
+
+
+
+
+
+
+      {/* <Box bgColor={"whitesmoke"}  w={"200%"} display={["block", "block", "block", "none", "none"]}  minH={"calc(100vh)"}>%
+      <NavbarCo />
+      <Box
+                bgColor={"whiteAlpha.600"}
+                mb={2}
+                fontFamily={"-apple-system"}
+              >
+                <SimpleGrid columns={2} p={5} spacing={5}>
+                  <Box>
+                    <Flex>
+                      <Text fontSize={"16px"} fontWeight={"bold"}>
+                        Type de poste
+                      </Text>
+                    </Flex>
+
+                    <Select
+                      border={"1px solid black"}
+                      onChange={(e) => setTypePoste(e.target.value)}
+                    >
+                      <option value={"INFORMATION"}>INFORMATION</option>
+                      <option value={"VENTE"}>VENTE</option>
+                      <option value={"LOCATION"}>LOCATION</option>
+                      <option value={"LOCATION_VENTE"}>LOCATION-VENTE</option>
+                    </Select>
+                  </Box>
+                  <Box>
+                    <Flex>
+                      <Text fontSize={"16px"} fontWeight={"bold"}>
+                        Type de bien
+                      </Text>
+                    </Flex>
+
+                    <Select
+                      width={"fit-content"}
+                      onChange={(e) => {
+                        setTypeBienId(e.target.value);
+                      }}
+                    >
+                      <option>Veuillez choisir une option</option>
+                      {typeBien.map((data, index) => (
+                        <option key={index} value={parseInt(index + 1)} >
+                          {data.designation}
+                        </option>
+                      ))}
+                    </Select>
+                  </Box>
+                  <Box>
+                    <Flex>
+                      <Text fontSize={"16px"} fontWeight={"bold"}>
+                        Meublé?
+                      </Text>
+                    </Flex>
+
+                    <Select border={"1px solid black"} onChange={(e)=>setMeuble(e.target.value)}>
+                      <option>Choisir un type</option>
+                      <option value="MEUBLE" >Oui</option>
+                      <option value="NON_MEUBLE">Non</option>
+                    </Select>
+                  </Box>
+                  <Box width={"100%"}>
+                    <Flex>
+                      <Text fontSize={"16px"} fontWeight={"bold"}>
+                        Prix
+                      </Text>
+                    </Flex>
+
+                    <RangeSlider
+                      aria-label={["min", "max"]}
+                      max={300}
+                      defaultValue={[0, 300]}
+                      onChange={(val) => setSliderValue(val)}
+                    >
+                      <RangeSliderTrack bg="red.100">
+                        <RangeSliderFilledTrack bg="tomato" />
+                      </RangeSliderTrack>
+                      <RangeSliderThumb boxSize={6} index={0}>
+                        <Box color="tomato" as={MdGraphicEq} />
+                      </RangeSliderThumb>
+                      {/* <RangeSliderThumb boxSize={6} index={1}>
+    <Box color='tomato' as={MdGraphicEq} />
+  </RangeSliderThumb> 
+                      <Tooltip
+                        hasArrow
+                        bg="teal.500"
+                        color="white"
+                        placement="top"
+                        isOpen={true}
+                        label={`${sliderValue}`}
+                      >
+                        <RangeSliderThumb index={1} />
+                      </Tooltip>
+                    </RangeSlider>
+                  </Box>
+                </SimpleGrid>
+                <Flex justifyContent={"right"}>
+                  <Button
+                    variant={"solid"}
+                    mr={2}
+                    colorScheme="red"
+                    onClick={() => {
+                      Zero();
+                    }}
+                  >
+                    Reinitialiser
+                  </Button>
+                  <Button
+                    variant={"solid"}
+                    colorScheme="blue"
+                    onClick={() => {
+                      Filtered();
+                    }}
+                  >
+                    Appliquer
+                  </Button>
+                </Flex>
+              </Box> 
+      <Box bgColor={"blue"} w={"full"}>
+      {message.length > 0 ?
+               (
+                <>
+                  {" "}
+                  <Box  p={2} borderRadius={"xl"}>
+                
+                    {/* <MyComponent /> 
+                  </Box>
+                  {message.map((data, ind) => (
+                    <Box key={ind} w={"500px"}>
+                      <Messages
+                        like={data.nombrelike}
+                        isliked={data.isLiked}
+                        isInteressed={data.isInteresse}
+                        isFav={data.isFavoris}
+                        comment={data.nombrecommentaire}
+                        favoris={data.nombrefavoris}
+                        idM={data.id}
+                        propio={data.Client}
+                        date={data.datePublication}
+                        image={data.fichiers}
+                        message={data.description}
+                        appart={data.typeBien}
+                        doc={data.typeDocuments}
+                        init={data.apportInitial}
+                        prix={data.prix}
+                        periodicite={data.periodicite}
+                        ville={data.localisation}
+                        piece={data.nombrePieces}
+                        chambre={data.nombreChambres}
+                        salon={data.nombreSalon}
+                        all={data}
+                      />
+                    </Box>
+                  ))}{" "}
+                </>
+              ) : (
+                <>
+                {/* <MyComponent />
+                <Text mt={5} fontWeight={700} fontSize={["15px","15px","15px","25px","25px"]} textAlign={"center"}> Aucune publication trouvée</Text>
+                </>
+              )}
+      </Box>
+         
+
+
+      </Box> */}
+      </>
     );
   }
 }
