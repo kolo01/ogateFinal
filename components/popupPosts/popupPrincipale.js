@@ -455,7 +455,7 @@ export default function PrincipalePopup() {
         </Text>
       </Box>
 
-      <Modal isOpen={isOpen} size={"5xl"} onClose={onClose}>
+      <Modal isOpen={isOpen} size={{base:"full",lg:"5xl"}} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Informations de base</ModalHeader>

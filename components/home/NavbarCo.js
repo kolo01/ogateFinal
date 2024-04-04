@@ -28,7 +28,7 @@ export default function NavbarCo(){
          <ThreeSec/>
         </Flex>
        
-        <Flex   justifyContent={"space-between"} px={20}>
+        <Flex  display={{base:"flex", lg: "none"}}   justifyContent={"space-between"} px={20}>
             <Logo/>
             <InputGroup border={"1px solid black"} width={["205px","205px","205px","335px","335px"]} mr={[2,2,2,0,0]} height={"34px"} mt={5} >
          <Input type="search" placeholder="Rechercher" border={"none"}  />
